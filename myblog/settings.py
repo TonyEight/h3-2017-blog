@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # My apps for myblog project
+    # Our third-party apps
+    'rest_framework',
+    # Our apps for myblog project
     'blog.apps.BlogConfig',
+    'api.apps.APIConfig',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +130,10 @@ STATIC_URL = '/static/'
 # Login settings
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'blog:index'
+
+# Django Rest Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
