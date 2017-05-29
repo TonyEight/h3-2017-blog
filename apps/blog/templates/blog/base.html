@@ -7,18 +7,26 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+      #blog-breadcrumb li.last-bread a {
+        font-style: italic;
+        color: #AEAEAE;
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="{% url 'blog:index' %}">myblog</a>
+      <a class="navbar-brand" href="{% url 'blog:index' %}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> myblog</a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          {% block navlink %}{% endblock %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:entry-create' %}"><i class="fa fa-pencil" aria-hidden="true"></i> Create new entry</a>
+          </li>
         </ul>
-        {% block navtext %}{% endblock %}
         <ul id="user-menu" class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
           <li class="nav-item dropdown">
@@ -38,6 +46,10 @@
       </div>
     </nav>
 
+    <ul id="blog-breadcrumb" class="breadcrumb">
+      {% block breadcrumb %}{% endblock %}
+    </ul>
+
     <div class="container-fluid" style="margin-top:25px;">
       {% block content %}{% endblock %}
     </div>
@@ -46,5 +58,11 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#blog-breadcrumb li').last().addClass('last-bread');
+        $('#blog-breadcrumb li.last-bread a').removeAttr('href');
+      })
+    </script>
   </body>
 </html>

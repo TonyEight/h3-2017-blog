@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 
 from .models import Category, Entry
+from .forms import EntryForm
 
 
 class HomeView(generic.ListView):
@@ -20,3 +22,9 @@ class EntryDetailView(generic.DetailView):
 	template_name = 'blog/entry-detail.html'
 	context_object_name = 'entry'
 	model = Entry
+
+
+class EntryCreateView(LoginRequiredMixin, generic.CreateView):
+	template_name = 'blog/entry-create.html'
+	model = Entry
+	form_class = EntryForm

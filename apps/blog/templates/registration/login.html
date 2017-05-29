@@ -1,14 +1,14 @@
 {% extends 'blog/base.html' %}
 
-{% block navtext %}
-<span class="navbar-text">&rarr; Login</span>
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="#">Login</a></li>
 {% endblock %}
 
 {% block content %}
 {% if form.errors %}
 <!-- Form Errors -->
-<div class="row form-errors">
-  <div class="alert alert-danger col-md-6 col-md-offset-2">
+<div class="row form-errors justify-content-md-center">
+  <div class="alert alert-danger col-8">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>Dang!</strong> Incorrect username or password. Please retry!
   </div>
@@ -16,33 +16,27 @@
 {% endif %}
 
 <!-- Login Form -->
-<div class="row login-form">
-  <form class="col-md-8 form-horizontal" method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="username" class="hidden-xs col-md-4 control-label">
-        Username
-      </label>
-      <div class="col-md-8">
-        <input type="text" class="form-control text-center" id="username" name="username" placeholder="...">
+<div class="row justify-content-md-center">
+  <div class="col-8">
+    <form class="form-horizontal" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="username" class="hidden-xs">
+          Username
+        </label>
+        <input type="text" class="form-control text-center" id="username" name="username" placeholder="Your username">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="password" class="hidden-xs col-md-4 control-label">
-        Password
-      </label>
-      <div class="col-md-8">
-        <input type="password" class="form-control text-center" id="password" name="password" placeholder="...">
+      <div class="form-group">
+        <label for="password" class="hidden-xs">
+          Password
+        </label>
+        <input type="password" class="form-control text-center" id="password" name="password" placeholder="Your password (Shhhh! Let's keep it a secret!)">
       </div>
-    </div>
-    <div class="form-group">
-      <div class="col-md-8 col-md-offset-4">
-        <button type="submit" class="btn btn-primary col-md-6">
-          {% if form.errors %}ReTRY{% else %}OK{% endif %}
-        </button>
-      </div>
-    </div>
-    <input type="hidden" name="next" value="{{ next }}" />
-  </form>
-</div><!-- /.login-form -->
+      <button type="submit" class="btn btn-primary">
+        {% if form.errors %}ReTRY{% else %}OK{% endif %}
+      </button>
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  </div>
+</div>
 {% endblock %}
