@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block navlink %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'blog:category-index' entry.category.pk %}">&larr; {{ entry.category.label }}</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+    <h4>{{ entry.title }}</h4>
+    <div>
+      {{ entry.content|safe }}
+    </div>
+  </div>
+</div>
+{% endblock %}

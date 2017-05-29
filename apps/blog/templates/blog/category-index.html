@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+{% block navtext %}
+<span class="navbar-text">&rarr; {{ category.label }}</span>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+{% for entry in category.entries.all %}
+<div class="card col">
+  <div class="card-block">
+    <h4 class="card-title">{{ entry.title }}</h4>
+    <p class="card-text">{{ entry.content|truncatechars:25 }}</p>
+    <a class="card-link" href="{% url 'blog:entry-detail' entry.pk %}">Read &rarr;</a>
+  </div>
+</div>
+{% empty %}
+<h4>There's no entry yet in this category.</h4>
+{% endfor %}
+</div>
+{% endblock %}

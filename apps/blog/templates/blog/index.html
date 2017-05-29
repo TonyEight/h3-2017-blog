@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="row">
+{% for category in categories %}
+{% with category.entries.count as num_entries %}
+<div class="card col">
+  <div class="card-block">
+    <h4 class="card-title">{{ category.label }}</h4>
+    <p class="card-text">
+    {% if num_entries > 0 %}
+    {{ num_entries }} entr{{ num_entries|pluralize:"y,ies" }}
+    </p>
+    <a class="card-link" href="{% url 'blog:category-index' category.pk %}">Browse &rarr;</a>
+    {% else %}
+    <em>There's no blog entry yet.</em>
+    </p>
+    {% endif %}
+  </div>
+</div>
+{% endwith %}
+{% empty %}
+<h4>There's no category yet.</h4>
+{% endfor %}
+</div>
+{% endblock %}
